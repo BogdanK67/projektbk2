@@ -1,14 +1,20 @@
 package junit;
 
 import OnlineStoryPages.LoginPage;
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +32,6 @@ public class LoginTest {
 
     }
 
-
     @Test
     public void testLoginWithPropoerCredentials() {
         LoginPage loginPage = new LoginPage(driver);
@@ -36,19 +41,25 @@ public class LoginTest {
 
         driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/article[2]/div/div[1]/h3/a")).click();
 
-        
-   //     public static List<String> productSize = Arrays.asList("S,", "M", "L", "XL");
-  //      static int size =1;
-        
         productProductPage.setProductSize("M");
         productProductPage.setProductQuantity("5");
         productProductPage.setAddtoBasket();
-        
-        //productProductPage("5");
-    }
+        productProductPage.setProceedToCheckout();
+        productProductPage.setProceedToCheckout2();
+        productProductPage.setContinueButton();
+        productProductPage.setConfirmDelivery();
+        productProductPage.setPaymentMethod();
+        productProductPage.setConditionsToApprove();
+        productProductPage.setOrderButton();
 
-    //private void productProductPage(String s) {
-    
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(screenshot, new File("/home/bogdan/Pictures/screen.png"));
+        } catch (Exception e) {
+            System.out.println("Nie udało się zapisać");
+        }
+
+    }
 
     @After
     public void tearDown() {

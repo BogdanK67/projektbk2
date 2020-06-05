@@ -16,12 +16,33 @@ public class ProductPage {
 
     @FindBy(id = "group_1")
     private WebElement sizeofProduct;
-    
+
     @FindBy(id = "quantity_wanted")
     private WebElement productQuantity;
 
-    @FindBy(xpath = "document.querySelector(\"#add-to-cart-or-refresh > div.product-add-to-cart > div > div.add > button\")")
+    @FindBy(css = "#add-to-cart-or-refresh > div.product-add-to-cart > div > div.add > button")
     private WebElement AddToBasket;
+
+    @FindBy(css = "#blockcart-modal > div > div > div.modal-body > div > div.col-md-7 > div > div > a")
+    private WebElement ProceedToCheckout;
+
+    @FindBy(css = "#main > div > div.cart-grid-right.col-xs-12.col-lg-4 > div.card.cart-summary > div.checkout.cart-detailed-actions.card-block > div > a")
+    private WebElement ProceedToCheckout2;
+
+    @FindBy(name = "confirm-addresses")
+    private WebElement ContinueButton;
+
+    @FindBy(name = "confirmDeliveryOption")
+    private WebElement ConfirmDelivery;
+
+    @FindBy(id = "payment-option-1")
+    private WebElement PaymentMethod;
+
+    @FindBy(id = "conditions_to_approve[terms-and-conditions]")
+    private WebElement ConditionsToApprove;
+
+    @FindBy(css = "#payment-confirmation > div.ps-shown-by-js > button")
+    private WebElement OrderButton;
 
     @FindBy(xpath = "//div[@class='current-price']/span")
     private WebElement currentPriceElement;
@@ -34,26 +55,57 @@ public class ProductPage {
     private WebElement discountPercentageElement;
 
 
-   public void setProductSize(String size) {
-       sizeofProduct.click();
-       sizeofProduct.sendKeys(size);
-   }
-
-
-
-       public void setProductQuantity(String quantity) {
-           productQuantity.clear();
-           productQuantity.sendKeys(quantity);
-
-    
+    public void setProductSize(String size) {
+        sizeofProduct.click();
+        sizeofProduct.sendKeys(size);
     }
 
-    public void setAddtoBasket() {
-        productQuantity.click();
+
+    public void setProductQuantity(String quantity) {
+        productQuantity.clear();
+        productQuantity.sendKeys(quantity);
 
 
     }
 
+    public void setAddtoBasket() {
+        AddToBasket.click();
+
+
+    }
+
+    public void setProceedToCheckout() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ProceedToCheckout.click();
+    }
+
+    public void setProceedToCheckout2() {
+        ProceedToCheckout2.click();
+    }
+
+    public void setContinueButton() {
+        ContinueButton.click();
+    }
+
+    public void setConfirmDelivery() {
+        ConfirmDelivery.click();
+    }
+
+    public void setPaymentMethod() {
+        PaymentMethod.click();
+    }
+
+    public void setConditionsToApprove() {
+        ConditionsToApprove.click();
+    }
+
+    public void setOrderButton() {
+        OrderButton.click();
+    }
 
     public double getCurrentPrice() {
         String stringCurrentPrice = currentPriceElement.getAttribute("content");
